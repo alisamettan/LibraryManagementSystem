@@ -1,13 +1,13 @@
 package librarymanagement.model;
 
 public class Book {
-    private String id;
+    private int id;
     private String name;
     private String author;
     private String category;
     private boolean isAvailable;
 
-    public Book(String id, String name, String author, String category, boolean isAvailable) {
+    public Book(int id, String name, String author, String category, boolean isAvailable) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -15,7 +15,7 @@ public class Book {
         this.isAvailable = isAvailable;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

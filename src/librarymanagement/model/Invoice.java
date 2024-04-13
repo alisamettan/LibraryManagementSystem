@@ -3,13 +3,13 @@ package librarymanagement.model;
 import java.util.Date;
 
 public class Invoice {
-    private String userId;
-    private String bookId;
+    private int userId;
+    private int bookId;
     private Date borrowDate;
     private Date returnDate;
     private double fineAmount;
 
-    public Invoice(String userId, String bookId, Date borrowDate, Date returnDate, double fineAmount) {
+    public Invoice(int userId, int bookId, Date borrowDate, Date returnDate, double fineAmount) {
         this.userId = userId;
         this.bookId = bookId;
         this.borrowDate = borrowDate;
@@ -17,11 +17,11 @@ public class Invoice {
         this.fineAmount = fineAmount;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
