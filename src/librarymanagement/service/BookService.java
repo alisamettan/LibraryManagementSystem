@@ -2,13 +2,15 @@ package librarymanagement.service;
 
 import librarymanagement.model.Book;
 import librarymanagement.model.Library;
+import librarymanagement.model.LibraryInteraction;
 
-public class BookService {
+public class BookService implements LibraryInteraction {
     private Library library;
 
     public BookService(Library library) {
         this.library = library;
     }
+
 
     public void addBook(Book book){
         library.getBooks().put(book.getId(),book);
@@ -31,4 +33,6 @@ public class BookService {
             System.out.println("Book not found.");
         }
     }
+
+
 }
