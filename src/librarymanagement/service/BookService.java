@@ -23,7 +23,7 @@ public class BookService {
         }
     }
 
-    public void deleteBook(String bookId){
+    public void deleteBook(int bookId){
         if(library.getBooks().containsKey(bookId)){
             library.getBooks().remove(bookId);
             System.out.println("Book deleted successfully.");

@@ -15,7 +15,7 @@ public class Book {
         this.isAvailable = isAvailable;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
