@@ -142,6 +142,13 @@ public class LibraryConsoleApp {
             System.out.println("Enter book details:");
             System.out.println("Id: ");
             int id = scanner.nextInt();
+            scanner.nextLine(); // Önceki int girişinden sonra bir satır atlayın
+
+            // Eğer girilen ID'ye sahip bir kitap zaten varsa, eklemeyi reddedin
+            if (libraryService.getBooks().containsKey(id)) {
+                System.out.println("A book with this ID already exists. Book cannot be added.");
+                return;
+            }
             System.out.println("Name: ");
             String name=scanner.nextLine();
             System.out.println("Author: ");
