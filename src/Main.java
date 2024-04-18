@@ -21,7 +21,7 @@ public class Main {
         Books books=new Books();
         Library library=new Library(books.getBooks(),users.getUsers());
 
-        Invoice invoice=new Invoice(1,2,new Date(),new Date(System.currentTimeMillis()+100000),0);
+        Invoice invoice=new Invoice(1,2,new Date(),new Date(System.currentTimeMillis()+100000),0);//her user için ayrı ayrı invoice tutmak için invoice,invoiceService'da list olarak tutuldu.
         List<Invoice> invoices=new ArrayList<>();
         invoices.add(invoice);
 

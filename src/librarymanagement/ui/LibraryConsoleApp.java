@@ -2,12 +2,14 @@ package librarymanagement.ui;
 
 import librarymanagement.model.Book;
 import librarymanagement.model.Librarian;
+import librarymanagement.model.Library;
 import librarymanagement.model.User;
 import librarymanagement.service.BookService;
 import librarymanagement.service.InvoiceService;
 import librarymanagement.service.LibraryService;
 import librarymanagement.service.UserService;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class LibraryConsoleApp {
@@ -87,9 +89,16 @@ public class LibraryConsoleApp {
     private void returnBook() {
         System.out.println("Enter book Id to return: ");
         int bookId=scanner.nextInt();
-        if(libraryService.getBooks().containsKey(bookId)){
+        if(!libraryService.getBooks().containsKey(bookId)){
             System.out.println("Book with id "+bookId+" returned successfully.");
             System.out.println("Fine amount: "+invoiceService.calculateFineForAllInvoices()+" Tl");
+            Map<Integer, Book> updatedBooks = libraryService.getBooks();
+            Book returnedBook=updatedBooks.get(bookId);
+
+            if (returnedBook != null) {
+                returnedBook.setAvailable(true);
+                updatedBooks.put(bookId, returnedBook);
+            }
         }else {
             System.out.println("Book with id "+bookId+" is not borrowed.");
         }
@@ -98,8 +107,13 @@ public class LibraryConsoleApp {
     private void borrowBook() {
         System.out.println("Enter book id to borrow: ");
         int bookId=scanner.nextInt();
-        if(libraryService.getBooks().containsKey(bookId)){
+        Map<Integer,Book> books=libraryService.getBooks();
+        Book borrowedBook=books.get(bookId);
+        if(books.containsKey(bookId) && borrowedBook.isAvailable()){
             System.out.println(invoiceService.canUserBorrowBooks());
+            System.out.println("Book with id "+bookId+" is borrowed successfully");
+            borrowedBook.setAvailable(false);
+            books.remove(bookId,borrowedBook);
         }else {
             System.out.println("Book that has this id not found");
         }
@@ -142,9 +156,8 @@ public class LibraryConsoleApp {
             System.out.println("Enter book details:");
             System.out.println("Id: ");
             int id = scanner.nextInt();
-            scanner.nextLine(); // Önceki int girişinden sonra bir satır atlayın
+            scanner.nextLine();
 
-            // Eğer girilen ID'ye sahip bir kitap zaten varsa, eklemeyi reddedin
             if (libraryService.getBooks().containsKey(id)) {
                 System.out.println("A book with this ID already exists. Book cannot be added.");
                 return;
